@@ -127,14 +127,14 @@ $ kubectl create serviceaccount --namespace kube-system tiller
 $ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 ```
 
-# Create a Storace Class with automatic AWS EBS storage provisioner (Note: Might already be created automatically)
+#### > Create a Storage Class with automatic AWS EBS storage provisioner **_(Note: Might already be created automatically)_**
 ```
 $ cd ~/tf-aws-eks-helm-mariadb/storage
 $ terraform init
 $ terraform apply
 ```
 
-#### > Set as default storage class (workaround for TF K8S provider's inability to do so) (Note: Might already be set automatically)
+#### > Set as default storage class (workaround for TF K8S provider's inability to do so) **_(Note: Might already be set automatically)_**
 ```
 $ kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
