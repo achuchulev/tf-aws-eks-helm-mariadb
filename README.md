@@ -104,7 +104,7 @@ $ kubectl version --short --client
 #### > Setup kubectl
 ```
 $ mkdir -p ~/.kube
-$ cd ~/tf-aws-eks-helm-dokuwiki/eks-getting-started
+$ cd ~/tf-aws-eks-helm-mariadb/eks-getting-started
 $ terraform output kubeconfig > ~/.kube/config
 ```
 **Verify**
@@ -127,16 +127,16 @@ $ kubectl create serviceaccount --namespace kube-system tiller
 $ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 ```
 
-# Create a Storace Class with automatic AWS EBS storage provisioner
+# Create a Storace Class with automatic AWS EBS storage provisioner (Note: Might already be created automatically)
 ```
 $ cd ~/tf-aws-eks-helm-mariadb/storage
 $ terraform init
 $ terraform apply
 ```
 
-#### > Set as default storage class (workaround for TF K8S provider's inability to do so)
+#### > Set as default storage class (workaround for TF K8S provider's inability to do so) (Note: Might already be set automatically)
 ```
-$ kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+$ kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
 
 #### > Install helm
